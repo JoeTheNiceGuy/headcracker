@@ -1,0 +1,72 @@
+public class Rompecabezas {
+
+    public static void main(String[] args) {
+        
+        Estructura prueba = new Estructura(4,4);
+        int [][]numeracion = {{1,2,3,4},{5,6,7,8},{9,10,11,12},{13,14,15,0}};
+        prueba.mostrar(numeracion);
+		
+		java.util.Scanner teclado = new java.util.Scanner(System.in);
+		int valor;
+		valor = teclado.nextInt();
+		
+		do{//this is suppose to make the changes but keep getting an error message.
+			System.out.print("Mover numero:\n");
+			prueba.cambiar(valor);
+			prueba.mostrar(numeracion);
+		}while(numeracion [0][0]!=0);
+        
+    }
+    
+}
+class Estructura{//the shepe and size of the puzzle.
+    private int [][] cuadro;
+    private int fila;
+    private int columna;
+    
+        Estructura(int fila, int columna){
+            this.fila=fila;
+            this.columna=columna;
+            cuadro = new int [fila][columna];
+            
+        }
+        
+	public int cambiar(int entrada){//the method to make the changes.
+		
+					
+			if(entrada == cuadro[fila+1][columna]){
+				entrada = cuadro[fila+1][columna];
+				cuadro[fila][columna]= 0;   
+			}else if(entrada == cuadro[fila][columna-1]){
+				entrada = cuadro[fila][entrada-1];
+				cuadro[fila][columna]= 0;
+			}else if(entrada== cuadro[fila-1][columna]){
+				entrada = cuadro[fila-1][columna];
+				cuadro[fila][columna]= 0;
+			}else if(entrada == cuadro[fila][columna+1]){
+				entrada = cuadro[fila][columna+1];
+				cuadro[fila][columna]= 0;
+			}else{
+				System.out.println("Error\n"+"Casilla no existente\n"+"Vuelva a intentar:\n");
+				entrada = LeerEntrada();
+			}
+		
+		return entrada;
+	}
+	public int LeerEntrada(){//just to read ints.
+		
+		java.util.Scanner teclado = new java.util.Scanner(System.in);
+		int valor;
+		valor = teclado.nextInt();
+		return valor;
+	}
+	void mostrar(int [][] a){//show the puzzle.
+		
+		for(int fila = 0; fila< a.length; fila++){
+			for(int columna = 0; columna< a[fila].length; columna++){
+				System.out.print(a[fila][columna]+"\t");
+			}
+		System.out.println();
+		}
+	}
+}
